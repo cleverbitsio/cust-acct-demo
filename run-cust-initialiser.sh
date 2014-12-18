@@ -2,7 +2,7 @@
 
 cd java-loaders;
 
-javac -cp Couchbase-Java-Client-1.4.6/*:joda-time-2.6/*:gson-2.3.1.jar:. MainCustGenerator.java;
-java -cp Couchbase-Java-Client-1.4.6/*:joda-time-2.6/*:gson-2.3.1.jar:. MainCustGenerator; 
+javac -cp libs/*:. MainCustGenerator.java;
+java -cp libs/*:. MainCustGenerator; 
 
 

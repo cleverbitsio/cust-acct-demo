@@ -2,7 +2,7 @@
 
 cd java-loaders;
 
-javac -cp Couchbase-Java-Client-1.4.6/*:joda-time-2.6/*:gson-2.3.1.jar:. MainTrxGenerator.java;
-java -cp Couchbase-Java-Client-1.4.6/*:joda-time-2.6/*:gson-2.3.1.jar:. MainTrxGenerator; 
+javac -cp libs/*:. MainTrxGenerator.java;
+java -cp libs/*:. MainTrxGenerator; 
 
 

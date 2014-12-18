@@ -97,10 +97,10 @@ public class MainAccGenerator {
 	  for (int i = 0; i < (iterations/10); i++, count++) {            
           
           ArrayList<Transaction> trxs = new ArrayList<Transaction>();
-          trxs.add(new Transaction(new Date(), "CR", "expenses", 500, 0));
-          trxs.add(new Transaction(new Date(), "DD", "bill", 0, 50));
+          trxs.add(new Transaction(new Date(), "CREDIT", "expenses", 500, 0));
+          trxs.add(new Transaction(new Date(), "DEBIT", "bill", 0, 50));
           Account account = new
-           Account("MR T DHARIWAL", "123456", count+"", "current", 5000, trxs);
+           Account("JOE BLOGGS", "123456", count+"", "CURRENT", 5000, trxs);
 
           value = gson.toJson(account);
           //String key = "key-" + s + "-" + i;

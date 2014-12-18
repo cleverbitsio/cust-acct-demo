@@ -43,7 +43,7 @@ import com.google.gson.Gson;
         }
 
         try {
-          acc.setAccount_name("TOM GREEN");
+          acc.setAccount_name("JOE BLOGGS");
 		  Random rnd = new Random();
 		  Transaction trx = new Transaction(new Date(), "", "", 0, 0);
 

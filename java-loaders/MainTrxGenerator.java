@@ -74,7 +74,8 @@ public class MainTrxGenerator {
     System.out.println("Length of value string: " + value.getBytes("UTF-8").length);
 
     // Set the number of key/value pairs to create
-    int iterations = 1000000; 
+    int iterations = 1000000; //live
+    //int iterations = 10000; //local test
 
     // This is just a class to track operations to aid with debugging
     OpTracker opTracker = new OpTracker();

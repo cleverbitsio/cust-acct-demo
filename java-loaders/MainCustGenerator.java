@@ -93,7 +93,7 @@ public class MainCustGenerator {
 
 	  for (int i = 0; i < (iterations/10); i++, count++) {
             
-          Customer customer = new Customer("GroupID:" + UUID.randomUUID(), "Terry","Dhariwal",new String[]{"terry@couchbase.com"}, new int []{count});
+          Customer customer = new Customer("GroupID:" + UUID.randomUUID(), "JOE","BLOGGS",new String[]{"terry@couchbase.com"}, new int []{count});
           value = gson.toJson(customer);
           //String key = "key-" + s + "-" + i;
           String key = "cust:" + count;

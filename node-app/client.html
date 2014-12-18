@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <h3>Account details</h3>
+    
+    <div class="container">
+      <div class="row-md">
+        <div class="col-md-3">
+          <div id="account_name"></div>
+          <div id="account_num"></div>
+          <div id="sort_code"></div>
+          <div id="account_type"></div>
+        </div><!--col-->
+        <div class="col-md-2">
+          <h5>Prev Statements</h5>
+          <a href="/trx/acct:10000-trx-2014-12" target="_blank">DEC</a><br/>
+          <a href="/trx/acct:10000-trx-2014-11" target="_blank">NOV</a><br/>
+          <a href="/trx/acct:10000-trx-2014-10" target="_blank">OCT</a><br/>
+        </div>
+        <div class="col-md-3">
+          <img class="irc_mi" src="http://www.bullsandbearsfx.co.uk/images/barclays.png" width="258" height="258">
+        </div><!--col-->
+        <div class="col-md-2">
+<img class="irc_mi" src="http://upload.wikimedia.org/wikipedia/en/archive/6/67/20130321214116!Couchbase,_Inc._official_logo.png" width="324" height="158">
+        </div> <!--col-->
+      </div> <!--row-->
+    </div> <!--container-->
+
+    <h3>Recent Transactions: </h3>
+    <div class="container">
+      <div id="balance"></div>
+      <time></time>
+      <div id="recent_trxs"></div>
+    </div>
+
+    <h2>JSON</h2>
+    <div class="container">
+    <pre id="json"></pre>  
+    </div>  
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+    <script>
+    // creating a new websocket
+    var socket = io.connect('http://localhost');
+    // on every message recived we print the new datas inside the #container div
+    socket.on('notification', function (data) {
+        //alert(data);
+        // convert the json string into a valid javascript object
+        var _data = JSON.parse(data);
+        //alert("_data");
+        //console.log(_data.recent_trxns);
+        
+
+        $('#account_name').html("<h5>Account Name: <small>" +  _data.account_name + "</small></h5>");
+        $('#account_num').html("<h5>Account #: <small>" +  _data.account_num + "</small></h5>");
+        $('#sort_code').html("<h5>Sort Code: <small>" +  _data.sort_code + "</small></h5>");
+        $('#account_type').html("<h5>Account Type: <small>" +  _data.type + "</small></h5>");
+        if(_data.running_balance == undefined)
+          $('#balance').html("<h4>Real Time Balance: <small><mark>" +  _data.balance + "</mark></small></h4>");
+        else
+          $('#balance').html("<h4>Real Time Balance: <small><mark>" +  _data.running_balance + "</mark></small></h4>");
+        
+
+        $('time').html('<h5>Last Update: </h5> <mark>' + _data.time + "</mark>");
+        var recent_trxs = "<table class='table table-striped'>" +
+                              "<thead> <tr><th>Time</th><th>Type</th><th>Description</th><th>Paid in</th>" +
+                                  "<th>Paid out</th></tr></thead><tbody>";
+
+        _data.recent_trxns.forEach(function(trx) {
+            //console.log(trx);
+            //recent_trxs += trx.type + " " + trx.amount + "<br/>"
+            recent_trxs += "<tr>" +
+
+            "<td>" + trx.time + "</td><td>" + trx.type + "</td><td>" + trx.description 
+                + "</td><td>" + trx.paid_in + "</td><td>" + trx.paid_out + "</td></tr>"
+
+        });
+        recent_trxs += "</tbody></table>";
+        console.log(recent_trxs);
+        $('#recent_trxs').html(recent_trxs);
+
+        var jsonPretty = JSON.stringify(_data, null, '\t');
+        $('#json').html(jsonPretty);
+
+    });
+    </script>
+
+
+</body>
+</html>
+
+
+
+

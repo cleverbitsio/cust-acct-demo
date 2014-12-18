@@ -13,6 +13,11 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
+
 import com.google.gson.Gson;
 
     class TrxAddingListener extends MyGetListener {
@@ -39,6 +44,15 @@ import com.google.gson.Gson;
 
         try {
           acc.setAccount_name("TOM GREEN");
+		  int credit = 2000;
+		  Transaction trx = new Transaction(new Date(), "BAC", "EmployeePayRoll", credit, 0);
+		  acc.getRecent_trxns().add(trx);
+		  if (acc.getRunning_balance() == null) {
+			acc.setRunning_balance(acc.getBalance() + credit);
+		  }
+		  else {
+			acc.setRunning_balance(acc.getRunning_balance() + credit);
+		  }
 		  value = gson.toJson(acc);
         }
         catch (Exception e) {

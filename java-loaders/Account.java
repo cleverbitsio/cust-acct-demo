@@ -19,8 +19,16 @@ public class Account implements Serializable{
         this.type = type;
         this.balance = balance;
         this.recent_trxns = recent_trxns;
+		this.running_balance = null;
     }
 
+	public Integer getRunning_balance() {
+		return running_balance;
+	}
+
+	public void setRunning_balance(Integer new_running_bal) {
+		this.running_balance = new_running_bal;
+	}
     public String getAccount_name() {
         return account_name;
     }

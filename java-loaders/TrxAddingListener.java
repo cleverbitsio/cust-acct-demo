@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.Date;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-
+import java.util.Random;
 
 import com.google.gson.Gson;
 
@@ -44,14 +44,30 @@ import com.google.gson.Gson;
 
         try {
           acc.setAccount_name("TOM GREEN");
-		  int credit = 2000;
-		  Transaction trx = new Transaction(new Date(), "BAC", "EmployeePayRoll", credit, 0);
+		  Random rnd = new Random();
+		  Transaction trx = new Transaction(new Date(), "", "", 0, 0);
+
+		  int amount = 0;
+		  if (rnd.nextBoolean()) {
+		  	amount += rnd.nextInt(1001);
+			trx.setPaid_in(amount);
+			trx.setType("CREDIT");
+			trx.setDescription("A sample Credit to Account");
+		  } 
+		  else {
+			int t = rnd.nextInt(1001);
+			amount -= t;
+			trx.setPaid_out(t);
+			trx.setType("DEBIT");
+			trx.setDescription("A Sample Debit from Account");
+		  }
+
 		  acc.getRecent_trxns().add(trx);
 		  if (acc.getRunning_balance() == null) {
-			acc.setRunning_balance(acc.getBalance() + credit);
+			acc.setRunning_balance(acc.getBalance() + amount);
 		  }
 		  else {
-			acc.setRunning_balance(acc.getRunning_balance() + credit);
+			acc.setRunning_balance(acc.getRunning_balance() + amount);
 		  }
 		  value = gson.toJson(acc);
         }

@@ -73,8 +73,8 @@ public class MainRecentTrxGenerator {
     // Set the number of key/value pairs to create
     //int iterations = 1_000; 
     //int iterations = 10_000; 
-    //int iterations = 100_000; 
-    int iterations = 1_000_000; 
+    int iterations = 100_000; 
+    //int iterations = 1_000_000; 
 
     // This is just a class to track operations to aid with debugging
     OpTracker opTracker = new OpTracker();
@@ -133,6 +133,7 @@ public class MainRecentTrxGenerator {
     // *****************************************************
 
     long phaseTwoStartTime = System.currentTimeMillis();
+	for (int c = 0; c < 10; c++) {
 	int count = 0;
     for (int s=0; s<50; s++)
     {
@@ -156,7 +157,7 @@ public class MainRecentTrxGenerator {
       latch.await();
       setLatch.await();
 	}
-
+	}
 
     opTracker.printTracker();
     // Shutting down properly

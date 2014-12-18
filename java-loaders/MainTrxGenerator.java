@@ -34,7 +34,7 @@ public class MainTrxGenerator {
 
     // (Subset) of nodes in the cluster to establish a connection
     List<URI> hosts = Arrays.asList(
-      new URI("http://localhost:8091/pools")
+      new URI("http://ec2-54-76-39-165.eu-west-1.compute.amazonaws.com:8091/pools")
     );
  
     // Name of the Bucket to connect to

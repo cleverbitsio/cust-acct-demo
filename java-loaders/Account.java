@@ -8,6 +8,7 @@ public class Account implements Serializable{
     private static final long serialVersionUID = 1L;
     private String account_name, sort_code, account_num, type;
     private Integer balance;
+	private Integer running_balance;
     private ArrayList<Transaction> recent_trxns = new ArrayList<>();
 
     public Account(String account_name, String sort_code, String account_num,

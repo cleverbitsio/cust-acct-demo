@@ -101,7 +101,6 @@ public class MainTrxGenerator {
 		while(date.getYear() < 2015) {
           	String key = "acct:" + itCount + "-trx-" + date.getYear() + "-" + date.getMonthOfYear(); 
 			date = date.plusMonths(1);
-		  	System.out.println("storing key: " + key);
           	try {
   	        	OperationFuture<Boolean> future = client.set(key, value);
             	opTracker.setScheduled(key);

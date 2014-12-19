@@ -93,11 +93,11 @@ public class MainTrxGenerator {
 	LocalDate date = new LocalDate("2014-01-01");
 
 	int itCount = 0;
-    for (int s=1; s<=100; s++)
+    for (int s=1; s<=25; s++)
     {
-	  final CountDownLatch latch = new CountDownLatch(iterations*12/100);
+	  final CountDownLatch latch = new CountDownLatch(iterations*12/25);
 
-	  for (int i = 1; i <= (iterations/100); i++) {
+	  for (int i = 1; i <= (iterations/25); i++) {
 		  itCount++;
 		while(date.getYear() < 2015) {
           	String key = "acct:" + itCount + "-trx-" + date.getYear() + "-" + date.getMonthOfYear(); 

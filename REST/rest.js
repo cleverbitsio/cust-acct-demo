@@ -2,7 +2,9 @@ var http = require("http"),
 	url = require("url"),
 	couchbase = require("couchbase");
 
-var cluster = new couchbase.Cluster();
+var PORT = process.env.PORT;
+
+var cluster = new couchbase.Cluster('couchbase://ec2-54-76-39-165.eu-west-1.compute.amazonaws.com');
 var bucket = cluster.openBucket('default');
 
 server = http.createServer(function (request, response) {
@@ -22,7 +24,7 @@ server = http.createServer(function (request, response) {
 
 });
 
-server.listen(8888);
+server.listen(PORT);
 
 console.log("server running");
 
@@ -31,11 +33,15 @@ server.on('error', function(err){
 		process.exit(1);
 });
 
+function randomInt (low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}
 
 function getTrx(request, response) {
 	console.log("processing trx");
+	var acct_id = randomInt(1,100000);
 
-	bucket.get("acct:100063-trx-2014-11", {format: 'raw'}, function(err, result) {
+	bucket.get("acct:"+acct_id+"-trx-2014-11", {format: 'raw'}, function(err, result) {
 		if (err) throw err;
 
 		//console.log(result.value);
